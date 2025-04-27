@@ -5,21 +5,22 @@ import { Button } from './Button';
 import { validateConfig } from '../utils/validate';
 
 type Props = {
+  value: string;
+  onChange: (val: string) => void;
   onApply: (jsonConfig: string) => void;
 };
 
-export const ConfigTab = ({ onApply }: Props) => {
-  const [input, setInput] = useState<string>('');
+export const ConfigTab = ({ value, onChange, onApply }: Props) => {
   const [error, setError] = useState<string | null>(null);
 
   const handleApply = () => {
-    const errorMessage = validateConfig(input);
+    const errorMessage = validateConfig(value);
     if (errorMessage) {
       setError(errorMessage);
       return;
     }
     setError(null);
-    onApply(input);
+    onApply(value);
   };
 
   return (
@@ -31,8 +32,8 @@ export const ConfigTab = ({ onApply }: Props) => {
         id="json-config"
         aria-label="JSON Configuration"
         aria-invalid={!!error}
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         placeholder="Enter JSON config here..."
         className={twMerge(
           'w-full h-64 p-2 border rounded font-mono text-sm',
