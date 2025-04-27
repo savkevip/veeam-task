@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { Button } from './Button';
-import { validateConfig } from '../utils/validate';
+import { validateConfig } from '../utils/validation';
 
 type Props = {
   value: string;

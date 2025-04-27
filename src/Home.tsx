@@ -5,17 +5,22 @@ import { ConfigTab } from './components/TabConfig';
 import { ResultTab } from './components/ResultTab';
 
 export const Home = () => {
-  const [input, setInput] = useState<string>(`{
+  const [jsonConfig, setJsonConfig] = useState<string>(`{
     "title": "Sample Form",
     "fields": [
       { "type": "string", "label": "Name" }
     ],
     "buttons": [
-      { "text": "Submit" }
+      { "text": "Submit", "type": "submit" },
+      { "text": "Cancel" }
     ]
   }`);
   const [activeTab, setActiveTab] = useState<Tab>('config');
-  const [jsonConfig, setJsonConfig] = useState<string>('');
+
+  const handleApply = (config: string) => {
+    setJsonConfig(config);
+    setActiveTab('result');
+  };
 
   return (
     <div className="max-w-4xl mx-auto p-4">
@@ -23,7 +28,7 @@ export const Home = () => {
       <TabSwitcher activeTab={activeTab} onTabChange={setActiveTab} />
       <div>
         {activeTab === 'config' ? (
-          <ConfigTab value={input} onChange={setInput} onApply={setJsonConfig} />
+          <ConfigTab value={jsonConfig} onChange={setJsonConfig} onApply={handleApply} />
         ) : jsonConfig ? (
           <ResultTab config={JSON.parse(jsonConfig)} />
         ) : (

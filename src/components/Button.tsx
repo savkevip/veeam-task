@@ -1,11 +1,9 @@
-// src/components/Button.tsx
-
 import { twMerge } from 'tailwind-merge';
 
 type Props = {
   children: React.ReactNode;
   onClick?: () => void;
-  type?: 'button' | 'submit';
+  type?: 'button' | 'submit' | 'reset';
   variant?: 'primary' | 'secondary';
   className?: string;
 };
@@ -18,7 +16,7 @@ export const Button = ({
   className = '',
 }: Props) => {
   const baseClasses =
-    'px-4 py-2 rounded transition font-medium focus:outline-none focus:ring-2 focus:ring-offset-2';
+    'px-4 py-2 rounded transition font-medium focus:outline-none focus:ring-2 focus:ring-offset-2 cursor-pointer';
 
   const variantClasses =
     variant === 'primary'

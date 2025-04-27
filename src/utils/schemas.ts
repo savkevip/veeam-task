@@ -7,10 +7,15 @@ export const fieldSchema = z
     type: z.enum(['string', 'number', 'multi-line', 'boolean', 'date', 'enum']),
     label: z.string(),
     options: z.array(z.string()).optional(),
+    isRequired: z.boolean().optional(),
   })
   .refine((data) => data.type !== 'enum' || (data.options && data.options.length > 0), {
     message: 'Options are required for enum type',
     path: ['options'],
+  })
+  .refine((data) => !data.isRequired || data.label, {
+    message: 'Field is required',
+    path: ['label'],
   });
 
 export const formSchema = z
@@ -20,6 +25,8 @@ export const formSchema = z
     buttons: z.array(
       z.object({
         text: z.string(),
+        type: z.enum(['submit', 'button', 'reset']).optional(),
+        onClick: z.function().args().returns(z.void()).optional(),
       }),
     ),
   })
