@@ -8,7 +8,7 @@ type Props = {
   type?: 'button' | 'submit';
   variant?: 'primary' | 'secondary';
   className?: string;
-}
+};
 
 export const Button = ({
   children,
