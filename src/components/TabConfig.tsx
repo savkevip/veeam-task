@@ -1,5 +1,7 @@
 import { useState } from 'react';
+
 import { Button } from './Button';
+import { formSchema } from '../utils/schemas';
 
 type Props = {
   onApply: (jsonConfig: string) => void;
@@ -11,11 +13,19 @@ export const ConfigTab = ({ onApply }: Props) => {
 
   const handleApply = () => {
     try {
-      JSON.parse(input);
+      const parsed = JSON.parse(input);
+      formSchema.parse(parsed);
+
       setError(null);
       onApply(input);
-    } catch {
-      setError('Invalid JSON');
+    } catch (err) {
+      if (err instanceof SyntaxError) {
+        setError('Invalid JSON syntax');
+      } else if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('Unknown error');
+      }
     }
   };
 
