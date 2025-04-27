@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { TabSwitcher, Tab } from './components/TabSwitcher';
-import { ConfigTab } from './components/TabConfig';
+import { ConfigTab } from './components/ConfigTab';
 import { ResultTab } from './components/ResultTab';
 
 export const Home = () => {

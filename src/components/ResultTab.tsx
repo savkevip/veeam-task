@@ -23,7 +23,7 @@ export const ResultTab = ({ config }: Props) => {
   });
 
   return (
-    <form onSubmit={formik.handleSubmit} className="space-y-4">
+    <form onSubmit={formik.handleSubmit} className="space-y-4" data-testid="form">
       <h2 className="text-xl font-semibold">{config.title}</h2>
 
       {config.fields.map((field, index) => {
@@ -64,7 +64,8 @@ export const ResultTab = ({ config }: Props) => {
                   <option key={i} value={option}>
                     {option}
                   </option>
-                ))}
+                ))}{' '}
+                ot
               </select>
             ) : null}
 
@@ -74,7 +75,9 @@ export const ResultTab = ({ config }: Props) => {
                   ? formik.errors[fieldKey]
                   : Array.isArray(formik.errors[fieldKey])
                     ? formik.errors[fieldKey].join(', ')
-                    : formik.errors[fieldKey]}
+                    : formik.errors[fieldKey] && typeof formik.errors[fieldKey] === 'object'
+                      ? 'There is an error'
+                      : null}
               </div>
             )}
           </div>
