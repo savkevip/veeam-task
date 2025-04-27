@@ -13,12 +13,14 @@ export const fieldSchema = z
     path: ['options'],
   });
 
-export const formSchema = z.object({
-  title: z.string(),
-  fields: z.array(fieldSchema),
-  buttons: z.array(
-    z.object({
-      text: z.string(),
-    }),
-  ),
-});
+export const formSchema = z
+  .object({
+    title: z.string(),
+    fields: z.array(fieldSchema),
+    buttons: z.array(
+      z.object({
+        text: z.string(),
+      }),
+    ),
+  })
+  .strict();
