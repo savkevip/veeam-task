@@ -12,7 +12,7 @@ export const Home = () => {
       <TabSwitcher activeTab={activeTab} onTabChange={setActiveTab} />
       <div>
         {activeTab === 'config' ? (
-          <ConfigTab />
+          <ConfigTab onApply={(jsonConfig: string) => console.log('json', jsonConfig)} />
         ) : (
           <div className="p-4 bg-gray-100 rounded">Result Tab</div>
         )}
